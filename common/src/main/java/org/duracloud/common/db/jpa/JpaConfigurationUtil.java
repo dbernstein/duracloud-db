@@ -9,6 +9,7 @@ package org.duracloud.common.db.jpa;
 
 import java.util.Properties;
 
+import org.hibernate.jpa.HibernatePersistenceProvider;
 import org.springframework.core.env.Environment;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.Database;
@@ -30,6 +31,8 @@ public class JpaConfigurationUtil {
         va.setGenerateDdl(!"none".equals(hbm2ddlAuto));
         va.setDatabase(Database.MYSQL);
         emf.setJpaVendorAdapter(va);
+        emf.setPersistenceProvider(new HibernatePersistenceProvider());
+
         Properties props = new Properties();
         if (!hbm2ddlAuto.equals("none")) {
             props.setProperty("hibernate.hbm2ddl.auto", hbm2ddlAuto);
